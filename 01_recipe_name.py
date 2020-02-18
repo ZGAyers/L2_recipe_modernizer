@@ -3,17 +3,29 @@
 
 # Not Blank function goes here
 def not_blank(question):
+    error = "Your recipe name has numbers in it."
 
     valid = False
     while not valid:
         response = input(question)
+        has_errors = ""
+
+        for letter in response:
+            if letter.isdigit() == True:
+                has_errors = "yes"
+                continue
 
         if response == "":
-           continue
+            continue
+
+        elif has_errors != "":
+            print(error)
+            continue
+
         else:
             return response
 
 # Main routine goes here
 recipe_name = not_blank("What is the name of the recipe? ")
 
-print("You are cooking {}".format(recipe_name))
+print("You're cooking {}".format(recipe_name))
