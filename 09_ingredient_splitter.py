@@ -22,3 +22,11 @@ if re.match(mixed_regex, recipe_line):
     compile_regrex = re.compile(mixed_regex)
     print(compile_regrex)
     unit_ingredient = re.split(compile_regrex, recipe_line)
+    unit_ingredient = (unit_ingredient[1]).strip() # remove extra white space
+    print(unit_ingredient)
+
+get_unit = unit_ingredient.split(" ", 1) # splits text at first space
+print(get_unit)
+
+unit = get_unit[0]
+ingredient = get_unit[1]
