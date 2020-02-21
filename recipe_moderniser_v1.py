@@ -77,6 +77,33 @@ def get_sf():
 
     return scale_factor
 
+
+def get_all_ingredients():
+    all_ingredients = []
+
+    stop = ""
+    print("Please enter ingredients one line at a time. Press 'xxx' when you are done.")
+    while stop != "xxx":
+
+        # Ask user for ingredient (via not blank function)
+        get_recipe_line = not_blank("Recipe Line: ",
+                                   "This can't be blank",
+                                   "yes")
+
+        # If exit code is typed and there are more than 2 ingredients
+        if get_recipe_line.lower() == "xxx" and len(all_ingredients) > 1:
+            break
+
+        elif get_recipe_line.lower() == "xxx" and len(all_ingredients) < 2:
+            print("You need at least two more ingredients in the list. "
+                  "Please add more ingredients.")
+
+        # If exit code is not entered, add ingredients to list
+        else:
+            all_ingredients.append(get_recipe_line)
+
+    return all_ingredients
+
 # -- Main Routine --
 
 # set up Dictionaries
@@ -108,18 +135,18 @@ source = not_blank("Where is the recipe from? ",
 scale_factor = get_sf()
 print(scale_factor)
 
-# Loop for each ingredient
-
-    # Get ingredient amount
-
-
-    # Get unit
+# Get amounts, units and ingredients from user
+full_recipe = get_all_ingredients()
 
 
-    # Convert unit to ml
+# Split each line of the recipe into amount, unit and ingredient...
 
 
-    # Convert from ml to g
+
+# Convert unit to ml
+
+
+# Convert from ml to g
 
 
 
