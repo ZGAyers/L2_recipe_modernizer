@@ -3,12 +3,12 @@ import re
 
 # ingredient has mixed fraction followed by unit and ingredient
 full_recipe = [
-    "1 1/2 ml flour"
-    "3/4 cup milk"
-    "1 cup flour"
-    "2 tablespoons white sugar"
-    "1.5 tsp baking powder"
-    "pinch of cinammon"
+    "1 1/2 ml flour",
+    "3/4 cup milk",
+    "1 cup flour",
+    "2 tablespoons white sugar",
+    "1.5 tsp baking powder",
+    "pinch of cinammon",
 ]
 
 mixed_regex = "\d{1,3}\s\d{1,3}\/\d{1,3}"
