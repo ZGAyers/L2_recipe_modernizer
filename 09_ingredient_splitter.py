@@ -47,7 +47,11 @@ for recipe_line in full_recipe:
 
     # Get unit and ingredient
     get_unit = unit_ingredient.split(" ", 1)  # splits text at first space
+
     unit = get_unit[0]
+
+
     ingredient = get_unit[1]
+
 
     print("{} {} {}".format(amount, unit, ingredient))
