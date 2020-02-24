@@ -246,11 +246,32 @@ for recipe_line in full_recipe:
     # Get unit and ingredient
     get_unit = unit_ingredient.split(" ", 1)  # splits text at first space
 
-    unit = get_unit[0]
-    # convert to ml
     num_spaces = recipe_line.count(" ")
     if num_spaces > 1:
+        # Item has unit and ingredient
+        unit = get_unit[0]
         ingredient = get_unit[1]
+        unit = unit_checker(unit)
+
+        # if unit is already in grams, add it to list
+        if unit == "g":
+            modernised_recipe.append("{:.0f} g {}".format(amount, ingredient))
+            continue
+
+        # convert to mls if possible...
+        amount = general_converter(amount, unit, unit_central, 1)
+
+        # If we converted to mls try and convert to grams
+        if amount[1] == "yes":
+            amount_2 = general_converter(amount[0], ingredient, food_dictionary, 250)
+
+            if amount_2[1] == "yes":
+                modernised_recipe.append("{:.0f} g {}".format(amount_2[0], ingredient))
+
+            # if the ingredient is not in the list, leave the unit as ml
+            else:
+                modernised_recipe.append("{:.0f} g {}".format(amount[0], ingredient))
+                continue
     # convert to g
     else:
         modernised_recipe.append("{} {}".format(amount, unit_ingredient))
