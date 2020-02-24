@@ -1,4 +1,4 @@
-# Program Assembly - Full program
+# Recipe Moderniser v1 - Zarah Ayers
 
 # modules to be used...
 import csv
@@ -53,6 +53,7 @@ def num_check(question):
         except ValueError:
             print(error)
 
+
 def get_sf():
     serving_size = num_check("What is the recipe serving size? ")
     dodgy_sf = "yes"
@@ -104,11 +105,12 @@ def get_all_ingredients():
 
     return all_ingredients
 
+
 def general_converter(how_much, lookup, dictionary, conversion_factor):
     # if unit is in dictionary, convert to mL
     if lookup in dictionary:
         mult_by = dictionary.get(lookup)
-        how_much = how_much * float(mult_by) * conversion_factor
+        how_much = how_much * float(mult_by) / conversion_factor
         converted = "yes"
     else:
         converted = "no"
@@ -116,9 +118,9 @@ def general_converter(how_much, lookup, dictionary, conversion_factor):
     return [how_much, converted]
 
 
-def unit_checker():
+def unit_checker(raw_unit):
 
-    unit_tocheck = input("Unit? ")
+    unit_tocheck = raw_unit
 
     # Abbreviation lists
     teaspoon = ["tsp", "teaspoon", "t", "teaspoons"]
