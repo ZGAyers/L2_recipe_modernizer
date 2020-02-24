@@ -105,7 +105,7 @@ def get_all_ingredients():
     return all_ingredients
 
 # -- Main Routine --
-
+modernised_recipe = []
 # set up Dictionaries
 
 
@@ -133,7 +133,6 @@ source = not_blank("Where is the recipe from? ",
                    "yes")
 # Get serving sizes and scale factor
 scale_factor = get_sf()
-print(scale_factor)
 
 # Get amounts, units and ingredients from user
 full_recipe = get_all_ingredients()
@@ -155,6 +154,7 @@ for recipe_line in full_recipe:
         amount = mixed_num.replace(" ", "+")
         # Change the string into a decimal
         amount = eval(amount)
+        amount = amount * scale_factor
 
         # Get unit and ingredient
         compile_regrex = re.compile(mixed_regex)
@@ -181,11 +181,14 @@ for recipe_line in full_recipe:
     unit = get_unit[0]
     # convert to ml
     num_spaces = recipe_line.count(" ")
-    ingredient = get_unit[1]
+    if num_spaces > 1:
+        ingredient = get_unit[1]
     # convert to g
+    else:
+        modernised_recipe.append("{} {}".format(amount, unit_ingredient))
+        continue
 
     modernised_recipe.append("{} {} {}".format(amount, unit, ingredient))
-
 
 # Put updated ingredient in list
 
