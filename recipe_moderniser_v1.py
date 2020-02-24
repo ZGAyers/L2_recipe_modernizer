@@ -104,8 +104,59 @@ def get_all_ingredients():
 
     return all_ingredients
 
+def general_converter(how_much, lookup, dictionary, conversion_factor):
+    # if unit is in dictionary, convert to mL
+    if lookup in dictionary:
+        mult_by = dictionary.get(lookup)
+        how_much = how_much * float(mult_by) * conversion_factor
+        converted = "yes"
+    else:
+        converted = "no"
+
+    return [how_much, converted]
+
+
+def unit_checker():
+
+    unit_tocheck = input("Unit? ")
+
+    # Abbreviation lists
+    teaspoon = ["tsp", "teaspoon", "t", "teaspoons"]
+    tablespoon = ["tbs", "tablespoon", "T", "tbsp", "tablespoons"]
+    cup = ["cup", "c", "cups"]
+    ounce = ["oz", "ounces", "fl oz", "ounce"]
+    pint = ["p", "pt", "fl pt", "pint", "pints"]
+    quart = ["q", "qt", "fl qt", "quart", "quarts"]
+    mls = ["ml", "milliliter", "millilitre", "milliliters", "millilitres"]
+    litre = ["litre", "liter", "l", "litres", "liters"]
+    pound = ["pound", "lb", "#", "pounds"]
+    grams = ["g", "gram", "grams"]
+
+    if unit_tocheck == "":
+        return unit_tocheck
+    elif unit_tocheck.lower() in grams:
+        return "g"
+    elif unit_tocheck == "T" or unit_tocheck.lower() in tablespoon:
+        return "tbs"
+    elif unit_tocheck.lower() in teaspoon:
+        return "tsp"
+    elif unit_tocheck.lower() in cup:
+        return "cup"
+    elif unit_tocheck.lower() in ounce:
+        return "ounce"
+    elif unit_tocheck.lower() in pint:
+        return "pint"
+    elif unit_tocheck.lower() in quart:
+        return "quart"
+    elif unit_tocheck.lower() in mls:
+        return "mls"
+    elif unit_tocheck.lower() in litre:
+        return "litre"
+    elif unit_tocheck.lower() in pound:
+        return "pound"
+
 # -- Main Routine --
-modernised_recipe = []
+
 # set up Dictionaries
 
 
@@ -122,6 +173,23 @@ unit_central = {
     "ml": 1
 }
 
+# --- Generate Food Dictionary ---
+# open file
+groceries = open('01_ingredients_ml_to_g.csv')
+# Read data into a list
+csv_groceries = csv.reader(groceries)
+# Create a dictionary to hold the data
+food_dictionary = {}
+
+# Add the data from the list into the dictionary
+# (first item in row is key, next is definition)
+
+for row in csv_groceries:
+    food_dictionary[row[0]] = row[1]
+
+
+# set up lists to hold original and 'modernised' recipes
+modernised_recipe = []
 # Ask user for recipe name and check its not blank
 recipe_name = not_blank("What is the recipe name? ",
                    "The recipe can't be blank and can't contain numbers, ",
