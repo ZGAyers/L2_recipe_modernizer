@@ -281,10 +281,10 @@ for recipe_line in full_recipe:
                 continue
 
     else:
-        modernised_recipe.append("{} {}".format(amount, unit_ingredient))
+        modernised_recipe.append("{} {}".format(amount[0], unit_ingredient))
         continue
 
-    modernised_recipe.append("{} {} {}".format(amount, unit, ingredient))
+    
 
 # Output ingredient list
 print()
