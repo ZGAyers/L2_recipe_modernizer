@@ -192,6 +192,7 @@ for row in csv_groceries:
 
 # set up lists to hold original and 'modernised' recipes
 modernised_recipe = []
+issue = "no"
 # Ask user for recipe name and check its not blank
 recipe_name = not_blank("What is the recipe name? ",
                    "The recipe can't be blank and can't contain numbers, ",
@@ -243,6 +244,10 @@ for recipe_line in full_recipe:
             modernised_recipe.append(recipe_line)
             continue
 
+        except SyntaxError:
+            issue = "yes"
+            modernised_recipe.append(recipe_line)
+
         unit_ingredient = get_amount[1]
 
     # Get unit and ingredient
@@ -274,16 +279,20 @@ for recipe_line in full_recipe:
             else:
                 modernised_recipe.append("{:.0f} g {}".format(amount[0], ingredient))
                 continue
-    # convert to g
+
     else:
         modernised_recipe.append("{} {}".format(amount, unit_ingredient))
         continue
 
     modernised_recipe.append("{} {} {}".format(amount, unit, ingredient))
 
-# Put updated ingredient in list
-
-
 # Output ingredient list
+print()
+print("{} Recipe".format(recipe_name))
+print("Source: {}".format(source))
+print()
+print("--------------------")
+print()
+print("Ingredients: ")
 for item in modernised_recipe:
     print(item)
