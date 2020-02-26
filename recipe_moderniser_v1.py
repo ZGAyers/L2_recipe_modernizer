@@ -192,7 +192,10 @@ for row in csv_groceries:
 
 # set up lists to hold original and 'modernised' recipes
 modernised_recipe = []
-issue = "no"
+
+# bold and reset are placeholders that can make text bold and not bold
+bold = "\033[1m"
+reset = "\033[0;0m"
 # Ask user for recipe name and check its not blank
 recipe_name = not_blank("What is the recipe name? ",
                    "The recipe can't be blank and can't contain numbers, ",
@@ -245,8 +248,9 @@ for recipe_line in full_recipe:
             continue
 
         except SyntaxError:
-            issue = "yes"
             modernised_recipe.append(recipe_line)
+            continue
+
 
         unit_ingredient = get_amount[1]
 
@@ -280,19 +284,14 @@ for recipe_line in full_recipe:
                 modernised_recipe.append("{:.0f} g {}".format(amount[0], ingredient))
                 continue
 
-    else:
-        modernised_recipe.append("{} {}".format(amount[0], unit_ingredient))
-        continue
-
-    
 
 # Output ingredient list
 print()
-print("{} Recipe".format(recipe_name))
+print("--------------------")
+print("~{} Recipe~".format(recipe_name))
 print("Source: {}".format(source))
-print()
 print("--------------------")
 print()
-print("Ingredients: ")
+print(bold, "Ingredients: ", reset)
 for item in modernised_recipe:
     print(item)
