@@ -254,7 +254,7 @@ for recipe_line in full_recipe:
 
         try:
             amount = eval(get_amount[0])  # convert amount to float of possible
-            amount = amount * scale_factor
+            amount *= scale_factor
 
         except NameError:
             amount = get_amount[0]
@@ -264,7 +264,6 @@ for recipe_line in full_recipe:
         except SyntaxError:
             modernised_recipe.append(recipe_line)
             continue
-
 
         unit_ingredient = get_amount[1]
 
@@ -297,6 +296,16 @@ for recipe_line in full_recipe:
             else:
                 modernised_recipe.append("{:.0f} g {}".format(amount[0], ingredient))
                 continue
+        # If the unit is not mls, leave the line unchanged
+        else:
+
+            modernised_recipe.append("{} {} {}".format(amount[0], unit,
+            ingredient))  # Update list with scaled amount and original unit
+
+    else:
+        # Item only has ingredient (no unit)
+
+        modernised_recipe.append("{} {}".format(amount[0], unit_ingredient))
 
 
 # Output ingredient list
@@ -307,5 +316,6 @@ print("Source: {}".format(source))
 print("--------------------")
 print()
 print(bold, "Converted Ingredients: ", reset)
+print()
 for item in modernised_recipe:
     print(item)
