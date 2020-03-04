@@ -1,6 +1,6 @@
 # Recipe Moderniser v2 - Zarah Ayers
 
-# modules to be used...
+# import modules to be used...
 import csv
 import re
 
@@ -159,6 +159,19 @@ def unit_checker(raw_unit):
     elif unit_tocheck.lower() in pound:
         return "pound"
 
+
+# rounder function
+def rounding(rounder):
+
+    # Round amount needed
+    if rounder % 1 == 0:
+        rounder = int(rounder)
+    elif rounder * 10 % 1 == 0:
+        rounder = "{:.1f}".format(rounder)
+    else:
+        rounder = "{:.2f}".format(rounder)
+
+    return rounder
 # -- Main Routine --
 
 # set up Dictionaries
@@ -299,13 +312,15 @@ for recipe_line in full_recipe:
                 continue
         # If the unit is not mls, leave the line unchanged
         else:
+            rounded_amount = rounding(amount[0])
 
-            modernised_recipe.append("{} {} {}".format(amount[0], unit,
+            modernised_recipe.append("{} {} {}".format(rounded_amount, unit,
             ingredient))  # Update list with scaled amount and original unit
 
     else:
+        rounded_amount = rounding(amount)
         # Item only has ingredient (no unit given)
-        modernised_recipe.append("{} {}".format(amount[0], unit_ingredient))
+        modernised_recipe.append("{} {}".format(rounded_amount, unit_ingredient))
 
 
 # Output ingredient list
