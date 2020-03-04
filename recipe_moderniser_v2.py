@@ -242,7 +242,7 @@ for recipe_line in full_recipe:
         amount = mixed_num.replace(" ", "+")
         # Change the string into a decimal
         amount = eval(amount)
-        amount = amount * scale_factor
+        amount *= scale_factor
 
         # Get unit and ingredient
         compile_regrex = re.compile(mixed_regex)
@@ -304,8 +304,7 @@ for recipe_line in full_recipe:
 
     else:
         # Item only has ingredient (no unit)
-
-        modernised_recipe.append("{} {}".format(amount[0], unit_ingredient))
+        modernised_recipe.append("{} {}".format(amount[1], unit_ingredient))
 
 
 # Output ingredient list
