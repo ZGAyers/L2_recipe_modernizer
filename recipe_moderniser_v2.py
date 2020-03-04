@@ -56,6 +56,7 @@ def num_check(question):
 
 def get_sf():
     serving_size = num_check("What is the recipe serving size? ")
+
     dodgy_sf = "yes"
     while dodgy_sf == "yes":
 
@@ -303,8 +304,8 @@ for recipe_line in full_recipe:
             ingredient))  # Update list with scaled amount and original unit
 
     else:
-        # Item only has ingredient (no unit)
-        modernised_recipe.append("{} {}".format(amount[1], unit_ingredient))
+        # Item only has ingredient (no unit given)
+        modernised_recipe.append("{} {}".format(amount[0], unit_ingredient))
 
 
 # Output ingredient list
@@ -314,6 +315,7 @@ print("~{} Recipe~".format(recipe_name))
 print("Source: {}".format(source))
 print("--------------------")
 print()
+# converted ingredients printed out to user
 print(bold, "Converted Ingredients: ", reset)
 print()
 for item in modernised_recipe:
