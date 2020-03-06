@@ -176,7 +176,6 @@ def rounding(rounder):
 
 # set up Dictionaries
 
-
 # set up list to hold 'modernised' ingredients
 unit_central = {
     "tsp": 5,
@@ -330,7 +329,7 @@ print("~{} Recipe~".format(recipe_name))
 print("Source: {}".format(source))
 print("--------------------")
 print()
-# converted ingredients printed out to user
+# Converted ingredients printed out to user
 print(bold, "Converted Ingredients: ", reset)
 print()
 for item in modernised_recipe:
