@@ -53,10 +53,11 @@ def num_check(question):
         except ValueError:
             print(error)
 
-
 def get_sf():
+
     serving_size = num_check("What is the recipe serving size? ")
 
+    # Main Routine goes here
     dodgy_sf = "yes"
     while dodgy_sf == "yes":
 
@@ -67,13 +68,11 @@ def get_sf():
         if scale_factor < 0.25:
             dodgy_sf = input("Warning: This scale factor is very small and you "
                              "might struggle to accurately weigh the ingredients. \n"
-                             "Do you want to fix this and make more servings? ").lower
-
+                             "Do you want to fix this and make more servings?").lower()
         elif scale_factor > 4:
             dodgy_sf = input("Warning: This scale factor is quite large - you might "
                              "have issues with mixing bowl volumes and oven space \n"
-                             "Do you want to fix this a make a smaller batch? ").lower
-
+                             "Do you want to fix this a make a smaller batch?").lower()
         else:
             dodgy_sf = "no"
 
